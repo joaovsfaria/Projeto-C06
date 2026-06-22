@@ -1,6 +1,6 @@
-# Projeto-C07 — Sistema de Gestão de Frota
+# Projeto-C06 — Sistema de Gestão de Frota
 
-Projeto final da disciplina **C07 - Banco de Dados I (INATEL)**.
+Projeto final da disciplina **C06 - Programação Orientada a Objetos (INATEL)**.
 
 Integração de um banco **MySQL** com um backend em **Java** (JDBC), organizado no
 padrão **Model + DAO**, com um menu de console para fazer Inserts, Updates,
