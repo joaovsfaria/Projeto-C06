@@ -45,9 +45,26 @@ public class Veiculo {
         this.capacidadeCarga = capacidadeCarga;
     }
 
+    public String getTipo() {
+        return "Generico";
+    }
+
+    public double calcularCustoPorKm() {
+        return 2.50;
+    }
+
+    public void exibirDetalhes() {
+        System.out.println("=== Detalhes do Veiculo ===");
+        System.out.println("ID: " + idVeiculo);
+        System.out.println("Tipo: " + getTipo());
+        System.out.println("Placa: " + placa);
+        System.out.println("Capacidade: " + capacidadeCarga + " kg");
+        System.out.printf("Custo estimado por km: R$ %.2f%n", calcularCustoPorKm());
+    }
+
     @Override
     public String toString() {
-        return String.format("Veiculo [id=%d, placa=%s, capacidade=%.2f kg]",
-                idVeiculo, placa, capacidadeCarga);
+        return String.format("%s [id=%d, placa=%s, capacidade=%.2f kg, custoKm=R$ %.2f]",
+                getTipo(), idVeiculo, placa, capacidadeCarga, calcularCustoPorKm());
     }
 }

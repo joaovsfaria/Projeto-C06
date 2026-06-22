@@ -7,7 +7,10 @@ USE gestao_frota;
 CREATE TABLE Veiculo (
     id_veiculo INT AUTO_INCREMENT PRIMARY KEY,
     placa VARCHAR(10) NOT NULL UNIQUE,
-    capacidade_carga DECIMAL(10,2) NOT NULL
+    capacidade_carga DECIMAL(10,2) NOT NULL,
+    tipo_veiculo VARCHAR(20) NOT NULL DEFAULT 'GENERICO',
+    quantidade_eixos INT,
+    quantidade_passageiros INT
 );
 
 CREATE TABLE Rastreador (
@@ -65,8 +68,12 @@ CREATE TABLE Manutencao (
 
 -- ========================
 
-INSERT INTO Veiculo (placa, capacidade_carga) VALUES 
-('ABC-1234', 15000.00), ('XYZ-5678', 8000.00), ('DEF-9012', 22000.00), ('GHI-3456', 12000.00), ('JKL-7890', 5000.00);
+INSERT INTO Veiculo (placa, capacidade_carga, tipo_veiculo, quantidade_eixos, quantidade_passageiros) VALUES 
+('ABC-1234', 15000.00, 'CAMINHAO', 4, NULL),
+('XYZ-5678', 8000.00, 'CAMINHAO', 3, NULL),
+('DEF-9012', 22000.00, 'CAMINHAO', 6, NULL),
+('GHI-3456', 12000.00, 'GENERICO', NULL, NULL),
+('JKL-7890', 5000.00, 'VAN', NULL, 12);
 
 INSERT INTO Rastreador (id_veiculo, numero_serie, data_ativacao) VALUES 
 (1, 'RST-99901', '2026-01-10'), (2, 'RST-99902', '2026-01-15'), (3, 'RST-99903', '2026-02-01'), (4, 'RST-99904', '2026-02-20'), (5, 'RST-99905', '2026-03-05');
