@@ -2,9 +2,13 @@
 
 Projeto final da disciplina **C06 - Programação Orientada a Objetos (INATEL)**.
 
-Integração de um banco **MySQL** com um backend em **Java** (JDBC), organizado no
-padrão **Model + DAO**, com um menu de console para fazer Inserts, Updates,
-Deletes, Selects e buscas em todas as tabelas.
+O sistema foi desenvolvido em **Java** com forte ênfase nos pilares da **Programação Orientada a Objetos (POO)**:
+- **Herança e Polimorfismo**: Uso de classes base para especialização de comportamentos (ex: classe abstrata `Pessoa` estendida por `Motorista` e `Dependente`).
+- **Encapsulamento**: Proteção dos dados sensíveis através de modificadores de acesso (`private`, `protected`) e métodos `getters`/`setters`.
+- **Modelagem Orientada a Objetos**: Mapeamento das entidades do sistema de frota (Veículo, Viagem, Rastreador, Manutenção) para objetos Java, separando suas responsabilidades.
+- **Padrão DAO (Data Access Object)**: Desacoplamento da lógica orientada a objetos da lógica de persistência de dados.
+
+O projeto conta também com integração a um banco **MySQL** via **JDBC** e um menu interativo no console para fazer o **CRUD completo** (Inserts, Updates, Deletes e Selects) em todas as tabelas e entidades.
 
 ---
 
