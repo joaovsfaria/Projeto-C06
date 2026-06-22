@@ -7,11 +7,13 @@ import br.inatel.frota.dao.OficinaDAO;
 import br.inatel.frota.dao.RastreadorDAO;
 import br.inatel.frota.dao.VeiculoDAO;
 import br.inatel.frota.dao.ViagemDAO;
+import br.inatel.frota.model.Caminhao;
 import br.inatel.frota.model.Dependente;
 import br.inatel.frota.model.Manutencao;
 import br.inatel.frota.model.Motorista;
 import br.inatel.frota.model.Oficina;
 import br.inatel.frota.model.Rastreador;
+import br.inatel.frota.model.Van;
 import br.inatel.frota.model.Veiculo;
 import br.inatel.frota.model.Viagem;
 
@@ -86,18 +88,15 @@ public class Main {
                     break;
                 }
                 case 3: {
-                    Veiculo v = new Veiculo();
-                    v.setPlaca(lerTexto("Placa: "));
-                    v.setCapacidadeCarga(lerDouble("Capacidade de carga (kg): "));
+                    Veiculo v = lerDadosVeiculo(false);
                     veiculoDAO.inserir(v);
                     System.out.println("Veiculo inserido com id " + v.getIdVeiculo());
                     break;
                 }
                 case 4: {
-                    Veiculo v = new Veiculo();
-                    v.setIdVeiculo(lerInt("Id do veiculo a atualizar: "));
-                    v.setPlaca(lerTexto("Nova placa: "));
-                    v.setCapacidadeCarga(lerDouble("Nova capacidade (kg): "));
+                    int idVeiculo = lerInt("Id do veiculo a atualizar: ");
+                    Veiculo v = lerDadosVeiculo(true);
+                    v.setIdVeiculo(idVeiculo);
                     veiculoDAO.atualizar(v);
                     System.out.println("Veiculo atualizado.");
                     break;
@@ -110,6 +109,37 @@ public class Main {
                 default: System.out.println("Opcao invalida.");
             }
         } while (op != 0);
+    }
+
+    private static Veiculo lerDadosVeiculo(boolean atualizar) {
+        System.out.println("Tipo do veiculo: 1 - Generico | 2 - Caminhao | 3 - Van");
+        int tipo = lerInt("Escolha o tipo: ");
+        String prefixo = atualizar ? "Novo " : "";
+        String placa = lerTexto(prefixo + "Placa: ");
+        double capacidadeCarga = lerDouble(prefixo + "Capacidade de carga (kg): ");
+
+        switch (tipo) {
+            case 2: {
+                Caminhao caminhao = new Caminhao();
+                caminhao.setPlaca(placa);
+                caminhao.setCapacidadeCarga(capacidadeCarga);
+                caminhao.setQuantidadeEixos(lerInt(prefixo + "Quantidade de eixos: "));
+                return caminhao;
+            }
+            case 3: {
+                Van van = new Van();
+                van.setPlaca(placa);
+                van.setCapacidadeCarga(capacidadeCarga);
+                van.setQuantidadePassageiros(lerInt(prefixo + "Quantidade de passageiros: "));
+                return van;
+            }
+            default: {
+                Veiculo veiculo = new Veiculo();
+                veiculo.setPlaca(placa);
+                veiculo.setCapacidadeCarga(capacidadeCarga);
+                return veiculo;
+            }
+        }
     }
 
     // ===================== RASTREADOR =====================

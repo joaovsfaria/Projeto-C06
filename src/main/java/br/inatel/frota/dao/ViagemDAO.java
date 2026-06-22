@@ -125,8 +125,8 @@ public class ViagemDAO implements IDAO<Viagem> {
     }
 
     private Viagem mapear(ResultSet rs) throws SQLException {
-        Veiculo veiculo = new Veiculo();
-        veiculo.setIdVeiculo(rs.getInt("id_veiculo"));
+        VeiculoDAO veiculoDAO = new VeiculoDAO();
+        Veiculo veiculo = veiculoDAO.buscarPorId(rs.getInt("id_veiculo"));
         Motorista motorista = new Motorista();
         motorista.setIdMotorista(rs.getInt("id_motorista"));
 
