@@ -117,6 +117,22 @@ public class VeiculoDAO implements IDAO<Veiculo> {
         return null;
     }
 
+    public Veiculo buscarPorId(int idVeiculo) {
+        String sql = "SELECT * FROM Veiculo WHERE id_veiculo = ?";
+        try (Connection con = Conexao.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idVeiculo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapear(rs);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar veiculo por id: " + e.getMessage(), e);
+        }
+        return null;
+    }
+
     private Veiculo mapear(ResultSet rs) throws SQLException {
         int idVeiculo = rs.getInt("id_veiculo");
         String placa = rs.getString("placa");

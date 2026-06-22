@@ -131,8 +131,8 @@ public class RastreadorDAO implements IDAO<Rastreador> {
     }
 
     private Rastreador mapear(ResultSet rs) throws SQLException {
-        Veiculo veiculo = new Veiculo();
-        veiculo.setIdVeiculo(rs.getInt("id_veiculo"));
+        VeiculoDAO veiculoDAO = new VeiculoDAO();
+        Veiculo veiculo = veiculoDAO.buscarPorId(rs.getInt("id_veiculo"));
         return new Rastreador(
                 rs.getInt("id_rastreador"),
                 veiculo,

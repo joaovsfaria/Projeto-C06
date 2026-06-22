@@ -125,8 +125,8 @@ public class ManutencaoDAO implements IDAO<Manutencao> {
     }
 
     private Manutencao mapear(ResultSet rs) throws SQLException {
-        Veiculo veiculo = new Veiculo();
-        veiculo.setIdVeiculo(rs.getInt("id_veiculo"));
+        VeiculoDAO veiculoDAO = new VeiculoDAO();
+        Veiculo veiculo = veiculoDAO.buscarPorId(rs.getInt("id_veiculo"));
         Oficina oficina = new Oficina();
         oficina.setIdOficina(rs.getInt("id_oficina"));
 
