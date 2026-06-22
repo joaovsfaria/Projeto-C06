@@ -12,6 +12,7 @@ import br.inatel.frota.model.Dependente;
 import br.inatel.frota.model.Manutencao;
 import br.inatel.frota.model.Motorista;
 import br.inatel.frota.model.Oficina;
+import br.inatel.frota.model.Pessoa;
 import br.inatel.frota.model.Rastreador;
 import br.inatel.frota.model.Van;
 import br.inatel.frota.model.Veiculo;
@@ -20,6 +21,7 @@ import br.inatel.frota.model.Viagem;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -48,6 +50,7 @@ public class Main {
             System.out.println("6 - Oficinas");
             System.out.println("7 - Manutencoes");
             System.out.println("8 - Consultas com JOIN");
+            System.out.println("9 - Detalhes das Pessoas (Motoristas + Dependentes)");
             System.out.println("0 - Sair");
             opcao = lerInt("Escolha: ");
 
@@ -61,6 +64,7 @@ public class Main {
                     case 6: menuOficina(); break;
                     case 7: menuManutencao(); break;
                     case 8: menuJoins(); break;
+                    case 9: detalharPessoas(); break;
                     case 0: System.out.println("Encerrando..."); break;
                     default: System.out.println("Opcao invalida.");
                 }
@@ -456,6 +460,24 @@ public class Main {
                 default: System.out.println("Opcao invalida.");
             }
         } while (op != 0);
+    }
+
+    private static void detalharPessoas() {
+        List<Pessoa> pessoas = new ArrayList<>();
+        pessoas.addAll(motoristaDAO.listar());
+        pessoas.addAll(dependenteDAO.listar());
+
+        if (pessoas.isEmpty()) {
+            System.out.println("(nenhuma pessoa cadastrada)");
+            return;
+        }
+
+        System.out.println("\n--- DETALHES DE TODAS AS PESSOAS ---");
+        for (Pessoa p : pessoas) {
+            p.exibirDetalhes();   // cada tipo se exibe do seu jeito
+            System.out.println();
+        }
+        System.out.println("Total: " + pessoas.size() + " pessoa(s).");
     }
 
     // ===================== TRADUCAO DE ERROS =====================
